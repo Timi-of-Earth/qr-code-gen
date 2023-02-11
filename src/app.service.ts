@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { constants, movieQuery } from './constants.helper';
 import * as QRCode from 'qrcode'
 import { HttpService } from '@nestjs/axios';
-import { lastValueFrom, pipe, map } from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable()
 export class AppService {
@@ -27,8 +27,7 @@ export class AppService {
       return response;
     }
 
-    const movies = this.httpService.get(movieQuery()).pipe(map(response =>  response.data.results));
-
-    return movies;
+    const response = this.httpService.get(movieQuery()).pipe(map(response =>  response.data.results.splice(9, response.data.results.length-10)));
+    return response;
   }
 }

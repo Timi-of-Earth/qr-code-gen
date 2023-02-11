@@ -7,7 +7,7 @@ import { updateConstants } from './constants.helper';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   updateConstants();
-  setInterval(updateConstants, 50000)
+  setInterval(updateConstants, 10000)
 
   app.useStaticAssets(join(__dirname, '..', 'public'));
   app.setBaseViewsDir(join(__dirname, '..', 'views'));

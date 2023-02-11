@@ -13,8 +13,13 @@ export class AppController {
   }
 
   @Get('movies/:key')
+  @Render('movies')
   async getMovies(@Param('key') key: string) {
-    let result = this.appService.getMovies(key);
+    let movies = await lastValueFrom(this.appService.getMovies(key));
+    let result = {};
+    for (let i=0; i<10; i++) {
+      result[`movie${i}`] = JSON.stringify(movies[i])
+    }
     return result;
   }
 }
